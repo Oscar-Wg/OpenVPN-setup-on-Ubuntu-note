@@ -1,5 +1,7 @@
 # OpenVPN setup on Ubuntu note
+
 **Environment**
+
 platform: Ubuntu 16.04 LTS (on [DigitalOcean](https://www.digitalocean.com/))
 
 requried software: openvpn, easy-ras
@@ -113,6 +115,7 @@ openvpn --genkey --secret keys/ta.key
 
 #### Step 6 Generate a Client Certificate
 Now, we can generate a client certificate and key pair.
+
 We will use `client1` as the value for our first certificate/key pair for this guide.
 To produce credentials without a password, to aid in automated connections, use the build-key command like this:
 ```sh
@@ -170,6 +173,7 @@ Inside `/etc/sysctl.conf`, look for the line that sets `net.ipv4.ip_forward`. Re
 net.ipv4.ip_forward=1
 ```
 Save and close the file when you are finished.
+
 Then we go to adjust the UFW rules configuration:
 ```sh
 ip route | grep default
@@ -281,6 +285,7 @@ auth SHA256
 key-direction 1
 ```
 Save the file when you are finished.
+
 Then we can create and open a file called make_config.sh within the ~/client-configs directory:
 ```sh
 vim ~/client-configs/make_config.sh
