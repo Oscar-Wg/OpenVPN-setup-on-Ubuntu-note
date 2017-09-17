@@ -6,14 +6,14 @@ platform: Ubuntu 16.04 LTS (on [DigitalOcean](https://www.digitalocean.com/))
 
 requried software: openvpn, easy-ras
 
-#### Step 1 Install package
+### Step 1 Install package
 update library, and install package:
 ```sh
 sudo apt-get update
 sudo apt-get install openvpn easy-rsa
 ```
 
-#### Step 2 Create CA
+### Step 2 Create CA
 create our own simple certificate authority(CA) directory:
 ```sh
 make-cadir ~/openvpn-ca
@@ -49,7 +49,7 @@ finally, edit the `KEY_NAME` value, here we use `server`:
 export KEY_NAME="server"
 ```
 
-#### step 4 Build the CA
+### step 4 Build the CA
 go into openvpn-ca and source vars
 ```sh
 cd ~/openvpn-ca
@@ -89,7 +89,7 @@ Name [server]:
 Email Address [admin@email.com]:
 ```
 
-#### Step 5 Create Server Certificate, Key, and Encryption Files
+### Step 5 Create Server Certificate, Key, and Encryption Files
 generate the OpenVPN server certificate and key pair (**using the KEY_NAME we setup before**):
 ```sh
 ./build-key-server server
@@ -113,7 +113,7 @@ Then we can generate an HMAC signature to strengthen the server's TLS integrity 
 openvpn --genkey --secret keys/ta.key
 ```
 
-#### Step 6 Generate a Client Certificate
+### Step 6 Generate a Client Certificate
 Now, we can generate a client certificate and key pair.
 
 We will use `client1` as the value for our first certificate/key pair for this guide.
@@ -124,7 +124,7 @@ source vars
 ./build-key-pass client1
 ```
 
-#### Step 7 Configure the OpenVPN Service
+### Step 7 Configure the OpenVPN Service
 These were placed within the `~/openvpn-ca/keys` directory as they were created. We need to move our CA cert and key, our server cert and key, the HMAC signature, and the Diffie-Hellman file:
 ```sh
 cd ~/openvpn-ca/keys
@@ -163,7 +163,7 @@ push "dhcp-option DNS 8.8.8.8"
 push "dhcp-option DNS 8.8.4.4"
 ```
 
-#### Step 8 Adjust the Server Networking Configuration
+### Step 8 Adjust the Server Networking Configuration
 First, we go to adjust the setting by modifying the `/etc/sysctl.conf` file:
 ```sh
 sudo vim /etc/sysctl.conf
@@ -227,7 +227,7 @@ sudo ufw disable
 sudo ufw enable
 ```
 
-#### Step 9 Start and Enable the OpenVPN Service
+### Step 9 Start and Enable the OpenVPN Service
 use systemctl to start openvpn, we will add `@server` since we name the `KEY_NAME` as server on step 3.
 ```sh
 sudo systemctl start openvpn@server
@@ -241,7 +241,7 @@ If everything went well, enable the service so that it starts automatically at b
 sudo systemctl enable openvpn@server
 ```
 
-#### Step 10 Create Client Configuration Infrastructure
+### Step 10 Create Client Configuration Infrastructure
 Create a directory structure within your home directory to store the files:
 ```sh
 mkdir -p ~/client-configs/files
@@ -316,7 +316,7 @@ Mark the file as executable by typing:
 ```sh
 chmod 700 ~/client-configs/make_config.sh
 ```
-#### Step 11 Generate Client Configurations
+### Step 11 Generate Client Configurations
 we can call the sh we create on step 10 to make our own client key pair file:
 ```sh
 cd ~/client-configs
