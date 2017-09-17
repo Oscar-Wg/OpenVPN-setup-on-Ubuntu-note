@@ -1,6 +1,7 @@
 # OpenVPN setup on Ubuntu note
 **Environment**
 platform: Ubuntu 16.04 LTS (on [DigitalOcean](https://www.digitalocean.com/))
+
 requried software: openvpn, easy-ras
 
 #### Step 1 Install package
